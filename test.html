@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <title>Graph</title>
+    <script type="text/javascript" src="data.js"></script>
+
+    <script>
+        var i;
+        var arr=[['Instance','Cpu Usage']];
+        var temp;
+        for(i=0;i<data.data.length;i++){
+            arr.push([data.data[i].INSTANCE_NAME,data.data[i].CPU_Usage]);
+            //arr.push([data.data[i].Category,data.data[i].CPU_Usage]);
+        }
+        
+    </script>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawStuff);
+
+      function drawStuff() {
+        var data = new google.visualization.arrayToDataTable(arr);
+
+        var options = {
+          width: 1500,
+          legend: { position: 'none' },
+          chart: {
+            title: 'Rank of Webpages',
+            subtitle: '' },
+          axes: {
+            x: {
+              0: { side: 'top', label: 'URL'} 
+            }
+          },
+          bar: { groupWidth: "90%" }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('top_x_div'));
+        
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      };
+    </script>
+  </head>
+  <body>
+    <div id="top_x_div" style="width: 1000px; height: 700px;"></div>
+  </body>
+</html>
